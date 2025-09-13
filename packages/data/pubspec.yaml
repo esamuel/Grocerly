@@ -1,0 +1,28 @@
+name: grocerly_data
+description: Data layer (Supabase, cache, repositories) for Grocerly
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.5.1
+  supabase_flutter: ^2.6.0
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  uuid: ^4.4.0
+  grocerly_domain:
+    path: ../domain
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: false
+

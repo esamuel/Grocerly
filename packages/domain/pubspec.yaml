@@ -1,0 +1,19 @@
+name: grocerly_domain
+description: Domain models and pure Dart logic for Grocerly
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  equatable: ^2.0.5
+
+dev_dependencies:
+  build_runner: ^2.4.11
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+  lints: ^4.0.0
+

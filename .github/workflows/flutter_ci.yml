@@ -1,0 +1,42 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ main, '**' ]
+  pull_request:
+    branches: [ main, '**' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Pub get (apps and packages)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for dir in apps/grocerly_flutter packages/domain packages/data packages/ui packages/i18n; do
+            if [ -f "$dir/pubspec.yaml" ]; then
+              echo "Running flutter pub get in $dir"
+              (cd "$dir" && flutter pub get)
+            fi
+          done
+
+      - name: Analyze
+        run: flutter analyze apps/grocerly_flutter packages/domain packages/data packages/ui packages/i18n
+
+      - name: Test (app only for now)
+        run: |
+          cd apps/grocerly_flutter
+          flutter test --no-pub
+

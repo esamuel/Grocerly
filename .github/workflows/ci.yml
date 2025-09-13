@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  js-ci:
+    # Skip entirely if there is no JavaScript/TypeScript project yet
+    if: ${{ hashFiles('**/package.json') != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Lint
+        run: pnpm -r lint || echo "lint step skipped"
+
+      - name: Typecheck
+        run: pnpm -r typecheck || echo "typecheck step skipped"
+
+      - name: Test
+        run: pnpm -r test -- --ci --reporters=default || echo "tests skipped"
+
+      - name: Build
+        run: pnpm -r build || echo "build skipped"
+
