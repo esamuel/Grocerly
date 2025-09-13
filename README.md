@@ -1,5 +1,7 @@
 # Grocerly
 
+grocery shop helper
+
 Smart, shared, and delightful grocery lists that think ahead. Voice input, real‑time sync, budgeting, pantry inventory, and recipe‑to‑list—localized for 40+ languages.
 
 Note: The project is migrating to Flutter. See `MIGRATION_FLUTTER.md` for the new architecture and steps.
